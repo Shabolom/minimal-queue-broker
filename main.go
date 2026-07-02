@@ -200,8 +200,13 @@ func parseTimeout(r *http.Request) (time.Duration, bool, error) {
 }
 
 func main() {
-	port := flag.String("port", "8080", "server port")
+	// для старта: go run main.go -port=8080
+	port := flag.String("port", "", "server port")
 	flag.Parse()
+
+	if *port == "" {
+		panic("port is required")
+	}
 
 	if err := http.ListenAndServe(":"+*port, newBroker()); err != nil {
 		panic(err)
