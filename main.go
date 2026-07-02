@@ -188,7 +188,7 @@ func (b *broker) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func parseTimeout(r *http.Request) (time.Duration, bool, error) {
 	raw := r.URL.Query().Get("timeout")
 	if raw == "" {
-		return 0, false, nil
+		return 5 * time.Second, true, nil
 	}
 
 	seconds, err := strconv.Atoi(raw)
